@@ -8,6 +8,7 @@ class App extends React.Component {
 
     this.state = {
       todo: "",
+      todos: [],
     };
   }
 
@@ -21,6 +22,19 @@ class App extends React.Component {
     e.preventDefault();
     console.log(this.state, "Form Submitted");
   };
+
+  componentDidMount() {
+    fetch("http://localhost:5000/todos")
+      .then((res) => res.json())
+      .then((data) => {
+        this.setState({
+          todos: data,
+        });
+      })
+      .catch((err) => {
+        console.log("FetchTodos Error:", err);
+      });
+  }
 
   render() {
     return (
