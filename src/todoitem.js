@@ -10,13 +10,17 @@ export default class TodoItem extends React.Component {
   }
 
   toggleDone = () => {
-    fetch(`http://localhost:5000/todo/${this.props.todoData.id}`, {
-      method: "PATCH",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify({
-        done: !this.state.done,
-      }),
-    })
+    // fetch(`http://localhost:5000/todo/${this.props.todoData.id}`
+    fetch(
+      `https://cmn-flask-todo-api.herokuapp.com/todo/${this.props.todoData.id}`,
+      {
+        method: "PATCH",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({
+          done: !this.state.done,
+        }),
+      }
+    )
       .then(() => {
         this.setState({
           done: !this.state.done,
